@@ -1102,7 +1102,7 @@ def calc_refl_trans_sphere(trajectories, n_medium, n_sample, radius, p, mu_abs,
     # exit in positive direction (transmission)
     # kz_correct will be nan if trajectory is totally internally reflected
     kz_correct = exit_kz(x, y, z, potential_exit_indices, radius, n_sample, n_medium)
-    no_tir = ~np.isnan(kz) # done this way to match film case for event_distribution
+    no_tir = ~np.isnan(kz_correct) # done this way to match film case for event_distribution
     pos_dir = kz_correct > 0
     
     # construct boolean arrays of all valid exits in pos & neg directions
