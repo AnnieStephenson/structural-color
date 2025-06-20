@@ -341,16 +341,19 @@ class Trajectory:
 
         m = n_particle/n_sample
         x = size_parameter(wavelen, n_sample, radius)
-        k = 2 * np.pi * n_sample / wavelen.magnitude
-        step = step.magnitude
+        #k = 2 * np.pi * n_sample / wavelen.magnitude # previous bug code leaving here temporarily for reference
+        k = 2 * np.pi * n_sample / wavelen.to_preferred().magnitude
+        step = step.to_preferred().magnitude
         # TODO: fix the bug in the above code.  If the step size and wavelength
         # are specified in different units, the results will be off by a lot.
         # test_fields uses different units.  The commented code below is how
         # this should look:
-        # m = sc.index.ratio(n_particle, n_sample)
-        # x = sc.size_parameter(wavelen, n_sample, radius)
-        # k = sc.wavevector(n_sample).magnitude
-        # step = step.to_preferred().magnitude
+        #m = sc.index.ratio(n_particle, n_sample)
+        #x = sc.size_parameter(wavelen, n_sample, radius)
+        #k = sc.wavevector(n_sample).magnitude
+        #step = step.to_preferred().magnitude
+        # TODO: decide if implemented above fix is the correct way to fix the bug. Leaving previous todo
+        # here for reference
         ntraj = theta.shape[1]
 
         # calculate the mie amplitude scattering matrix
